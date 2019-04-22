@@ -12,6 +12,7 @@ module.exports = class UserRouter {
     this._router.delete('/delete/:id', (req, res, next) => this.remove(req, res, next));
     this._router.post('/create', (req, res, next) => this.create(req, res, next));
     this._router.put('/update/:id', (req, res, next) => this.update(req, res, next));
+    this._router.get('/search/:name', (req, res, next) => this.search(req, res, next));
   }
 
 
@@ -49,6 +50,19 @@ module.exports = class UserRouter {
   async readAll(req, res, next) {
     try {
       let heroes = await this._heroController.getHeroes();
+      return res.status(200).send(heroes);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async search(req, res, next) {
+    try {
+      let name = (req.param('name'));
+      console.log({ "name": name});
+      let heroes = await this._heroController.searchHeroes({name: {$regex: name}}) ;
+      console.log('heroes', heroes);
+
       return res.status(200).send(heroes);
     } catch (err) {
       next(err);

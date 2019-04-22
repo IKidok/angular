@@ -24,4 +24,8 @@ module.exports = class DatabaseService {
   update(selector, data) {
     return this._connection.updateOne(selector, data);
   }
+
+  search(selector) {
+      return this._connection.find(selector).toArray();
+  }
 };

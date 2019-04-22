@@ -25,5 +25,8 @@ module.exports = class HeroController {
     return this._heroService.update(selector, data);
   }
 
+  searchHeroes(selector) {
+    return this._heroService.search(selector);
+  }
 
 };

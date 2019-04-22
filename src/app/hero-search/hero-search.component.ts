@@ -16,7 +16,7 @@ export class HeroSearchComponent  {
   constructor(private  heroService: HeroService) { }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
+    this.heroService.searchHeroes(this.heroFilter.name)
       .subscribe(heroes => this.heroes = heroes);
   }
 

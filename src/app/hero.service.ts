@@ -15,6 +15,7 @@ export class HeroService {
   private heroesUrl = 'http://localhost:3000/hero';
   private getAllHeroesUrl = `${this.heroesUrl}/readAll`;
   private createHeroUrl = `${this.heroesUrl}/create`;
+  private searchHeroesUrl = (name) => `${this.heroesUrl}/search/${name}`;
   private getHeroUrl = (id) => `${this.heroesUrl}/read/${id}`;
   private deleteHeroUrl = (id) => `${this.heroesUrl}/delete/${id}`;
   private updateHeroUrl = (id) => `${this.heroesUrl}/update/${id}`;
@@ -75,7 +76,7 @@ export class HeroService {
     if (!term.trim()) {
       return of([]);
     }
-    return this.http.get<Hero[]>(this.getAllHeroesUrl).pipe(
+    return this.http.get<Hero[]>(this.searchHeroesUrl(term)).pipe(
       tap(_ => this.log(`found heroes matching "${term}"`)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
