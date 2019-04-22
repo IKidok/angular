@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const connect = require('./services/database/dbConnect').connect;
-const HeroRouter = require('./entities/user').router;
+const HeroRouter = require('./entities/hero').router;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));

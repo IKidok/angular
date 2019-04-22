@@ -1,13 +1,11 @@
 <div id="search-component">
   <h4>Hero Search</h4>
 
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-
-  <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | filterBy: filter " >
-      <a routerLink="/detail/{{hero._id}}">
-        {{ hero.name }}
-      </a>
+  <input type="text" [(ngModel)]=" heroFilter.name" (keyup)="onKey($event)" placeholder="name">
+  <ul *ngIf="heroes && heroFilter.name"  class="search-result">
+    <li *ngFor="let hero of heroes | filterBy: heroFilter">
+      <a routerLink="/detail/{{hero._id}}">{{ hero.name }}</a>
     </li>
+    <li *ngIf="(heroes | filterBy: heroFilter).length === 0">No matching elements</li>
   </ul>
 </div>

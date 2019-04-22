@@ -33,7 +33,7 @@ export class HeroService {
 
   getHero(id: any): Observable<Hero> {
     return this.http.get<Hero>(this.getHeroUrl(id)).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
+      tap(_ => this.log(`fetched hero = ${_.name}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
@@ -42,11 +42,9 @@ export class HeroService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    console.log('BYY');
     console.log(hero);
-    console.log('EEE');
     return this.http.put(this.updateHeroUrl(hero._id), hero, httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero._id}`)),
+      tap(_ => this.log(`updated hero =${hero.name}`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }
@@ -56,19 +54,19 @@ export class HeroService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     return this.http.post<Hero>(this.createHeroUrl, hero, httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero id=${newHero._id}`)),
+      tap((newHero: Hero) => this.log(`added hero =${newHero.name}`)),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
 
-  deleteHero(hero: Hero | string): Observable<Hero> {
+  deleteHero(hero: Hero ): Observable<Hero> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     const id = typeof hero === 'string' ? hero : hero._id;
     console.log(id);
     return this.http.delete<Hero>(this.deleteHeroUrl(id), httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
+      tap(_ => this.log(`deleted hero =${ hero.name}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
   }
