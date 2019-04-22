@@ -4,6 +4,8 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
+
+
 @Component({
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
@@ -18,6 +20,8 @@ export class HeroSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const temp = '';
+    const filter: any = { name: temp};
     this.heroes$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),

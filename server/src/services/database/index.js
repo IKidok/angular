@@ -6,7 +6,7 @@ module.exports = class DatabaseService {
   }
 
   create(data) {
-    return this._connection.insertOne(data).toArray();
+    return this._connection.insertOne(data);
   }
 
   readAll() {
@@ -14,14 +14,14 @@ module.exports = class DatabaseService {
   }
 
   remove(selector, all = false) {
-    return all ? this._connection.deleteMany(selector) : this._connection.deleteOne(selector).toArray();
+    return all ? this._connection.deleteMany(selector) : this._connection.deleteOne(selector);
   }
 
   read(selector) {
     return this._connection.find(selector).toArray();
   }
 
-  update(selector, data, all = false) {
-    return all ? this._connection.updateMany(selector, data).toArray() : this._connection.updateOne(selector, data).toArray();
+  update(selector, data) {
+    return this._connection.updateOne(selector, data);
   }
 };
