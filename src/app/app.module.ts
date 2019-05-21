@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
@@ -11,6 +10,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { HeroDialogExampleComponent } from './hero-dialog-example/hero-dialog-example.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatButtonModule} from '@angular/material/button';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS, MatButtonToggleModule, MatCheckboxModule, MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSortModule, MatTableModule
+} from '@angular/material';
+import { TableHeroesComponent } from './table-heroes/table-heroes.component';
 
 
 @NgModule({
@@ -20,16 +28,35 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    HeroDialogExampleComponent,
+    TableHeroesComponent
   ],
   imports: [
     BrowserModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FilterPipeModule
+    FilterPipeModule,
+    MatDatepickerModule,
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
-  providers: [],
+  entryComponents: [
+    HeroDialogExampleComponent
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Add new hero</h1>
+<form [formGroup]="addHero">
+
+  <mat-form-field>
+    <input placeholder="Имя" matInput formControlName="name">
+    <mat-error *ngIf="addHero.controls.name.errors?.required">
+      Поле должно быть заполнено
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input placeholder="Уровень" matInput formControlName="level">
+    <mat-error *ngIf="addHero.controls.level.errors?.required">
+      Поле должно быть заполнено
+    </mat-error>
+    <mat-error *ngIf="addHero.controls.level.errors?.pattern">
+      Поле должно быть цЫфрой
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input placeholder="Класс" matInput formControlName="classGroup">
+    <mat-error *ngIf="addHero.controls.classGroup.errors?.required">
+      Поле должно быть заполнено
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input placeholder="Фракция" matInput formControlName="fraction">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input placeholder="Дата рождения" matInput formControlName="dateOfBirth" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="addHero.controls.dateOfBirth.errors?.required">
+      Поле должно быть заполнено
+    </mat-error>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Отмена</button>
+    <button disabled="{{addHero.invalid}}" mat-button (click)="onAdd()" cdkFocusInitial>Ok</button>
+  </div>
+
+</form>

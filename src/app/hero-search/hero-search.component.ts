@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Hero } from '../hero';
+import { IHero } from '../hero';
 import { HeroService } from '../hero.service';
 
 
@@ -11,7 +11,7 @@ import { HeroService } from '../hero.service';
   styleUrls: [ './hero-search.component.scss' ]
 })
 export class HeroSearchComponent  {
-  heroes: Hero[];
+  heroes: IHero[];
   heroFilter: any = { name: '' };
   constructor(private  heroService: HeroService) { }
 

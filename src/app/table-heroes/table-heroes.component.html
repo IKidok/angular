@@ -1,0 +1,35 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Level </th>
+      <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="classGroup">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Class </th>
+      <td mat-cell *matCellDef="let element"> {{element.classGroup}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fraction">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fraction </th>
+      <td mat-cell *matCellDef="let element"> {{element.fraction}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateOfBirth">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> dateOfBirth </th>
+      <td mat-cell *matCellDef="let element"> {{element.dateOfBirth}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay "></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay ;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>

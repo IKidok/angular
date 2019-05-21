@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
+import { IHero } from '../hero';
 import { HeroService } from '../hero.service';
+import { MatDialog} from '@angular/material';
+import { HeroDialogExampleComponent } from '../hero-dialog-example/hero-dialog-example.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +10,15 @@ import { HeroService } from '../hero.service';
   styleUrls: [ './dashboard.component.scss' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Hero[] = [];
+  heroes: IHero[] = [];
 
-  constructor(private heroService: HeroService) { }
+  constructor(
+    private heroService: HeroService,
+    public  dialog: MatDialog) { }
+
+  openDialog(): void {
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', data: {}});
+  }
 
   ngOnInit() {
     this.getHeroes();

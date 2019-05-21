@@ -59,10 +59,7 @@ module.exports = class UserRouter {
   async search(req, res, next) {
     try {
       let name = (req.param('name'));
-      console.log({ "name": name});
       let heroes = await this._heroController.searchHeroes({name: {$regex: name}}) ;
-      console.log('heroes', heroes);
-
       return res.status(200).send(heroes);
     } catch (err) {
       next(err);
