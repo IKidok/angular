@@ -19,7 +19,14 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input placeholder="Класс" matInput formControlName="classGroup">
+    <select matNativeControl formControlName="classGroup">
+      <option label="Класс"></option>
+      <option value="Warior">Warrior</option>
+      <option value="Mage">Mage</option>
+      <option value="Archer">Archer</option>
+      <option value="Assasin">Assasin</option>
+      <option value="Hunter">Hunter</option>
+    </select>
     <mat-error *ngIf="addHero.controls.classGroup.errors?.required">
       Поле должно быть заполнено
     </mat-error>

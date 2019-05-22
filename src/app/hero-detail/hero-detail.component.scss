@@ -1,3 +1,31 @@
+.card {
+  max-width: 400px;
+}
+.header-text {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+}
+
+.mat-card-title{
+  text-align: center;
+}
+.mat-card-avatar {
+  width: 20%;
+  padding: 5px;
+  border-radius: .5px;
+  border-style: solid;
+  border-color: #039be5;
+  border-width: 2px;
+  text-align: center;
+}
+.mat-card-subtitle {
+  margin: 0;
+  margin-top: 100px;
+}
+
 /* HeroDetailComponent's private CSS styles */
 label {
   display: inline-block;

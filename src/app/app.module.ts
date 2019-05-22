@@ -16,7 +16,8 @@ import { MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DEFAULT_OPTIONS, MatButtonToggleModule, MatCheckboxModule, MatDatepickerModule,
   MatDialogModule,
-  MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSortModule, MatTableModule
+  MatFormFieldModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSortModule, MatTableModule,
+  MatCardModule
 } from '@angular/material';
 import { TableHeroesComponent } from './table-heroes/table-heroes.component';
 
@@ -50,7 +51,8 @@ import { TableHeroesComponent } from './table-heroes/table-heroes.component';
     MatNativeDateModule,
     MatButtonToggleModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
   entryComponents: [
     HeroDialogExampleComponent

@@ -13,6 +13,7 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent implements OnInit {
 
   @Input() hero: IHero;
+  age: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,11 +29,20 @@ export class HeroDetailComponent implements OnInit {
     let id = '';
     this.route.params.subscribe(params => { id = params['id']; });
     this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
+      .subscribe(hero => {
+        this.hero = hero;
+        this.hero.dateOfBirth = new Date(this.hero.dateOfBirth);
+        this.age = (new Date()).getFullYear() - this.hero.dateOfBirth.getFullYear();
+      });
+
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  onChange(): void {
+
   }
 
   save(): void {

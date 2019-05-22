@@ -1,13 +1,18 @@
 <div *ngIf="hero">
-
-  <h2>{{ hero.name  | uppercase }} Details </h2>
-  <div><span>name: </span> {{ hero.name }}</div>
-  <!--<div>-->
-    <!--<label>name:-->
-      <!--<input [(ngModel)]="hero.name" placeholder="name"/>-->
-    <!--</label>-->
-  <!--</div>-->
-  <button (click)="save()">save</button>
-  <button (click)="goBack()">Back</button>
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar >{{ hero.level }}<br> Уровень</div>
+      <mat-card-title class="header-text">{{ hero.name }}</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-card-content> <b>Класс:</b> {{ hero.classGroup }} </mat-card-content>
+    <mat-card-content *ngIf="hero.fraction"><b>Фракция:</b> {{ hero.fraction }} </mat-card-content>
+    <mat-card-content><b>Дата рождения:</b> {{ hero.dateOfBirth.toUTCString() }} </mat-card-content>
+    <mat-card-content><b>Возраст:</b> {{age}}</mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="onChange()">Изменить</button>
+      <button mat-button (click)="goBack()">Назад</button>
+    </mat-card-actions>
+  </mat-card>
 
 </div>
