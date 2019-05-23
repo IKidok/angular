@@ -19,22 +19,30 @@ export class HeroDialogExampleComponent {
     public dialogRef: MatDialogRef<HeroDialogExampleComponent>,
     public heroService: HeroService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(this.data._id);
     this.addHero = new FormGroup({
-      name: new FormControl(Math.round(Math.random() * 1000), Validators.required),
-      level: new FormControl(1, [Validators.required, Validators.pattern('[0-9]+')]),
-      classGroup: new FormControl('', Validators.required),
-      fraction: new FormControl(),
-      dateOfBirth: new FormControl('', Validators.required)
+      name: new FormControl(this.data.name ? this.data.name : Math.round(Math.random() * 1000), Validators.required),
+      level: new FormControl(this.data.level ? this.data.level : 1, [Validators.required, Validators.pattern('[0-9]+')]),
+      classGroup: new FormControl(this.data.classGroup ? this.data.classGroup : '', Validators.required),
+      fraction: new FormControl(this.data.fraction ? this.data.fraction : ''),
+      dateOfBirth: new FormControl(this.data.dateOfBirth ? this.data.dateOfBirth : '', Validators.required)
     });
   }
 
-  onNoClick(): void {
+  close(): void {
     this.dialogRef.close();
   }
 
   onAdd() {
     this.hero = this.addHero.getRawValue();
-    this.heroService.addHero(this.hero).subscribe();
-    this.dialogRef.close();
+    this.hero.level = Number(this.hero.level);
+    this.heroService.addHero(this.hero).subscribe( () => this.close());
+  }
+
+  onChange() {
+    this.hero = this.addHero.getRawValue();
+    this.hero._id = this.data._id;
+    this.hero.level = Number(this.hero.level);
+    this.heroService.updateHero(this.hero).subscribe(() => this.close());
   }
 }

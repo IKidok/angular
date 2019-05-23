@@ -29,8 +29,17 @@ module.exports = class UserRouter {
   async update(req, res, next) {
     try {
       let id = ObjectId(req.param('id'));
-      let name = req.body.name;
-      let result = await this._heroController.updateHero({"_id": id}, {$set: { "name": name }});
+      let hero = req.body;
+      let result = await this._heroController.updateHero(
+        {"_id": id},
+        {$set: {
+          "name": hero.name,
+          "level": hero.level,
+          "classGroup": hero.classGroup,
+          "fraction": hero.fraction,
+          "dateOfBirth": hero.dateOfBirth
+          }
+        });
       return res.status(200).send(result);
     } catch (err) {
       next(err);

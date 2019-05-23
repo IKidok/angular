@@ -29,3 +29,10 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+.main-header {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

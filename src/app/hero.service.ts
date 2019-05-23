@@ -43,7 +43,6 @@ export class HeroService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    console.log(hero);
     return this.http.put(this.updateHeroUrl(hero._id), hero, httpOptions).pipe(
       tap(_ => this.log(`updated hero =${hero.name}`)),
       catchError(this.handleError<any>('updateHero'))

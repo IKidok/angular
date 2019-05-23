@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeroService } from '../hero.service';
+import { MatDialog} from '@angular/material';
+import { HeroDialogExampleComponent } from '../hero-dialog-example/hero-dialog-example.component';
 
 
 @Component({
@@ -13,16 +15,22 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent implements OnInit {
 
   @Input() hero: IHero;
-  age: number;
+  age: number | Date;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
-    private location: Location
+    private location: Location,
+    public  dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.getHero();
+  }
+
+  calcAge(): void {
+    this.hero.dateOfBirth = new Date(this.hero.dateOfBirth);
+    this.age = (new Date()).getFullYear() - this.hero.dateOfBirth.getFullYear();
   }
 
   getHero(): void {
@@ -31,8 +39,7 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.getHero(id)
       .subscribe(hero => {
         this.hero = hero;
-        this.hero.dateOfBirth = new Date(this.hero.dateOfBirth);
-        this.age = (new Date()).getFullYear() - this.hero.dateOfBirth.getFullYear();
+        this.calcAge();
       });
 
   }
@@ -42,12 +49,10 @@ export class HeroDetailComponent implements OnInit {
   }
 
   onChange(): void {
-
-  }
-
-  save(): void {
-    this.heroService.updateHero(this.hero)
-      .subscribe(() => this.goBack());
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', hasBackdrop: true, data: this.hero});
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getHero();
+    });
   }
 
 }
