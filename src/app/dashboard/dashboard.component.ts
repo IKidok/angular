@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     public  dialog: MatDialog) { }
 
   openDialog(): void {
-    this.dialog.open(HeroDialogExampleComponent, {width: '300px', hasBackdrop: true, data: {}});
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', disableClose: true, hasBackdrop: true, data: {}});
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     this.heroService.getHeroes()
       .subscribe(heroes => {
         this.temp = heroes.sort((a, b) => b.level - a.level );
-        this.heroes = this.temp.slice(0, 4);
+        this.heroes = this.temp.slice(0, 5);
       });
   }
 }

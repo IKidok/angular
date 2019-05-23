@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 h1 {
-  font-size: 1.2em;
+  font-size: 3em;
   color: #999;
   margin-bottom: 0;
 }
@@ -11,10 +11,12 @@ h2 {
   margin-top: 0;
   padding-top: 0;
 }
+
 nav a {
   padding: 5px 10px;
   text-decoration: none;
   margin-top: 10px;
+  font-size: 2em;
   display: inline-block;
   background-color: #eee;
   border-radius: 4px;
@@ -23,7 +25,7 @@ nav a:visited, a:link {
   color: #607d8b;
 }
 nav a:hover {
-  color: #039be5;
+  color: #002984;
   background-color: #cfd8dc;
 }
 nav a.active {

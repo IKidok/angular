@@ -49,7 +49,7 @@ export class HeroService {
     );
   }
 
-  addHero(hero: IHero): Observable<IHero> {
+  addHero(hero: IHero): Observable<IHero>  {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
