@@ -19,7 +19,6 @@ export class HeroDialogExampleComponent {
     public dialogRef: MatDialogRef<HeroDialogExampleComponent>,
     public heroService: HeroService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(this.data._id);
     this.addHero = new FormGroup({
       name: new FormControl(this.data.name ? this.data.name : Math.round(Math.random() * 1000), Validators.required),
       level: new FormControl(this.data.level ? this.data.level : 1, [Validators.required, Validators.pattern('[0-9]+')]),

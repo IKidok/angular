@@ -8,13 +8,7 @@
             (click)="remove(hero)">x</button>
   </li>
 </ul>
-<div>
-  <label>Hero name:
-    <input #heroName />
-  </label>
-  <button (click)="add(heroName.value); heroName.value=''">
-    Add
-  </button>
-</div>
+<button mat-raised-button (click)="openDialog()" color="primary">Добавить героя</button>
+
 
 

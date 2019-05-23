@@ -30,8 +30,6 @@ export class DashboardComponent implements OnInit {
       .subscribe(heroes => {
         this.temp = heroes.sort((a, b) => b.level - a.level );
         this.heroes = this.temp.slice(0, 4);
-        console.log(this.heroes);
-        console.log(this.temp);
       });
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IHero} from '../hero';
 import { HeroService } from '../hero.service';
+import {HeroDialogExampleComponent} from '../hero-dialog-example/hero-dialog-example.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-heroes',
@@ -12,11 +14,16 @@ export class HeroesComponent implements OnInit {
 
   heroes: IHero[];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService,
+              public dialog: MatDialog) { }
 
   getHeroes(): void {
    this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);
+  }
+
+  openDialog(): void {
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', hasBackdrop: true, data: {}});
   }
 
   ngOnInit() {
