@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IHero} from './hero';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {MessageService} from './message.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -55,8 +55,10 @@ export class HeroService {
     };
     return this.http.post<IHero>(this.createHeroUrl, hero, httpOptions).pipe(
       tap(_ => this.log(`added hero =${hero.name}`)),
-      catchError(this.handleError<IHero>('addHero'))
-    );
+      catchError(err => {
+        //console.log('waaa', err);
+        return throwError(err);
+      }));
   }
 
   deleteHero(hero: IHero ): Observable<IHero> {
@@ -76,7 +78,7 @@ export class HeroService {
     }
     return this.http.get<IHero[]>(this.searchHeroesUrl(term)).pipe(
       tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<IHero[]>('searchHeroes', []))
+      catchError(this.handleError<IHero[]>('searchHeroes')),
     );
   }
 

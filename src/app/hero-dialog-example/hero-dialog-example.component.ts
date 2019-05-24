@@ -35,7 +35,9 @@ export class HeroDialogExampleComponent {
   onAdd() {
     this.hero = this.addHero.getRawValue();
     this.hero.level = Number(this.hero.level);
-    this.heroService.addHero(this.hero).subscribe( (some) =>  this.close());
+    this.heroService.addHero(this.hero).subscribe(
+      (some) => { console.log('some', some); },
+      error => console.log('Mi obosralis', error));
   }
 
   onChange() {
