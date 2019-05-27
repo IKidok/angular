@@ -11,14 +11,13 @@ import { HeroDialogExampleComponent } from '../hero-dialog-example/hero-dialog-e
 })
 export class DashboardComponent implements OnInit {
   heroes: IHero[] = [];
-  temp: IHero[] = [];
 
   constructor(
     private heroService: HeroService,
     public  dialog: MatDialog) { }
 
   openDialog(): void {
-    this.dialog.open(HeroDialogExampleComponent, {width: '300px', disableClose: true, hasBackdrop: true, data: {}});
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', data: {}});
   }
 
   ngOnInit() {
@@ -28,8 +27,7 @@ export class DashboardComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => {
-        this.temp = heroes.sort((a, b) => b.level - a.level );
-        this.heroes = this.temp.slice(0, 5);
+        this.heroes = ( heroes.sort((a, b) => b.level - a.level )).slice(0,5);
       });
   }
 }

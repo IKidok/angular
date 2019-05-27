@@ -49,7 +49,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
   onChange(): void {
-    this.dialog.open(HeroDialogExampleComponent, {width: '300px', hasBackdrop: true, data: this.hero});
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', data: this.hero});
     this.dialog.afterAllClosed.subscribe(() => {
       this.getHero();
     });

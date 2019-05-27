@@ -37,7 +37,10 @@ export class HeroDialogExampleComponent {
     this.hero = this.addHero.getRawValue();
     this.hero.level = Number(this.hero.level);
     this.heroService.addHero(this.hero).subscribe(
-      () => this.close(),
+      () => {
+        this.openSnackBar('Success', 'adding hero');
+        this.close();
+      },
       error => {
         this.openSnackBar(error.error, 'adding Hero');
       });
@@ -51,6 +54,10 @@ export class HeroDialogExampleComponent {
     this.hero = this.addHero.getRawValue();
     this.hero._id = this.data._id;
     this.hero.level = Number(this.hero.level);
-    this.heroService.updateHero(this.hero).subscribe(() => this.close());
+    this.heroService.updateHero(this.hero).subscribe(() => {
+      this.close();
+      this.openSnackBar('Success', 'changing hero');
+    },
+        error => this.openSnackBar(error.error, 'changing Hero'));
   }
 }

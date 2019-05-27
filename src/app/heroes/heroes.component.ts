@@ -23,7 +23,7 @@ export class HeroesComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(HeroDialogExampleComponent, {width: '300px', hasBackdrop: true, data: {}});
+    this.dialog.open(HeroDialogExampleComponent, {width: '300px', data: {}});
     this.dialog.afterAllClosed.subscribe(() => this.getHeroes() );
   }
 

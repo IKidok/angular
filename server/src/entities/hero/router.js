@@ -37,17 +37,23 @@ module.exports = class UserRouter {
     try {
       let id = ObjectId(req.param('id'));
       let hero = req.body;
-      let result = await this._heroController.updateHero(
-        {"_id": id},
-        {$set: {
-          "name": hero.name,
-          "level": hero.level,
-          "classGroup": hero.classGroup,
-          "fraction": hero.fraction,
-          "dateOfBirth": hero.dateOfBirth
-          }
-        });
-      return res.status(200).send(result);
+      let alreadyExist = await this._heroController.searchHeroes({name: {$regex: hero.name}, dateOfBirth: {$regex: hero.dateOfBirth}});
+      if (alreadyExist.length === 0) {
+        let result = await this._heroController.updateHero(
+          {"_id": id},
+          {$set: {
+            "name": hero.name,
+            "level": hero.level,
+            "classGroup": hero.classGroup,
+            "fraction": hero.fraction,
+            "dateOfBirth": hero.dateOfBirth
+            }
+          });
+        return res.status(200).send(result);
+      } else {
+        return res.status(418).send('Hero already exist');
+      }
+
     } catch (err) {
       next(err);
     }
@@ -55,7 +61,8 @@ module.exports = class UserRouter {
 
   async read(req, res, next) {
     try {
-      let id = ObjectId(req.param('id'));Hero({"_id": id});
+      let id = ObjectId(req.param('id'));
+      let hero = await this._heroController.getHero({"_id": id});
       return res.status(200).send(hero[0]);
     } catch (err) {
       next(err);
