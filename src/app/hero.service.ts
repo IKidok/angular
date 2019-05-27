@@ -55,10 +55,10 @@ export class HeroService {
     };
     return this.http.post<IHero>(this.createHeroUrl, hero, httpOptions).pipe(
       tap(_ => this.log(`added hero =${hero.name}`)),
-      catchError(err => {
+      catchError(
         //console.log('waaa', err);
-        return throwError(err);
-      }));
+        this.handleError<IHero>('added')
+      ));
   }
 
   deleteHero(hero: IHero ): Observable<IHero> {
@@ -94,9 +94,8 @@ export class HeroService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
+      this.log(`${operation} failed: ${error.error}`);
+      return throwError(error);
     };
   }
 }

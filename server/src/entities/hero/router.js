@@ -21,7 +21,7 @@ module.exports = class UserRouter {
     try {
       let hero = req.body;
       let alreadyExist = await this._heroController.searchHeroes({name: {$regex: hero.name}, dateOfBirth: {$regex: hero.dateOfBirth}});
-      if (alreadyExist._id ) {
+      if (alreadyExist.length === 0) {
         let result = await this._heroController.addHero(req.body);
         return res.status(200).send(result);
       }
@@ -37,8 +37,6 @@ module.exports = class UserRouter {
     try {
       let id = ObjectId(req.param('id'));
       let hero = req.body;
-      let alreadyExist = this._heroController.searchHeroes({name: {$regex: hero.name}, dateOfBirth: {$regex: hero.dateOfBirth}});
-      console.log(alreadyExist);
       let result = await this._heroController.updateHero(
         {"_id": id},
         {$set: {

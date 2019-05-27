@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { IHero } from '../hero';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { HeroService} from '../hero.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -18,6 +18,7 @@ export class HeroDialogExampleComponent {
   constructor(
     public dialogRef: MatDialogRef<HeroDialogExampleComponent>,
     public heroService: HeroService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.addHero = new FormGroup({
       name: new FormControl(this.data.name ? this.data.name : Math.round(Math.random() * 1000), Validators.required),
@@ -36,8 +37,14 @@ export class HeroDialogExampleComponent {
     this.hero = this.addHero.getRawValue();
     this.hero.level = Number(this.hero.level);
     this.heroService.addHero(this.hero).subscribe(
-      (some) => { console.log('some', some); },
-      error => console.log('Mi obosralis', error));
+      () => this.close(),
+      error => {
+        this.openSnackBar(error.error, 'adding Hero');
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
   onChange() {

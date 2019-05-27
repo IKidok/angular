@@ -20,6 +20,7 @@ import {
   MatCardModule
 } from '@angular/material';
 import { TableHeroesComponent } from './table-heroes/table-heroes.component';
+import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -52,13 +53,15 @@ import { TableHeroesComponent } from './table-heroes/table-heroes.component';
     MatButtonToggleModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   entryComponents: [
     HeroDialogExampleComponent
   ],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
