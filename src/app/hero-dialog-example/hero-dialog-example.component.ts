@@ -21,11 +21,14 @@ export class HeroDialogExampleComponent {
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.addHero = new FormGroup({
-      name: new FormControl(this.data.name ? this.data.name : Math.round(Math.random() * 1000), Validators.required),
-      level: new FormControl(this.data.level ? this.data.level : 1, [Validators.required, Validators.pattern('[0-9]+')]),
-      classGroup: new FormControl(this.data.classGroup ? this.data.classGroup : '', Validators.required),
-      fraction: new FormControl(this.data.fraction ? this.data.fraction : ''),
-      dateOfBirth: new FormControl(this.data.dateOfBirth ? this.data.dateOfBirth : '', Validators.required)
+      name: new FormControl(this.data.name ? this.data.name : Math.round(Math.random() * 1000),
+        [Validators.required, Validators.pattern('[A-Za-zА-Яа-я]+')]),
+      level: new FormControl(this.data.level ? this.data.level : 1,
+        [Validators.required, Validators.pattern('[0-9]+')]),
+      classGroup: new FormControl(this.data.classGroup ? this.data.classGroup : '',
+        [Validators.required, Validators.pattern('[A-Za-zА-Яа-я]+')]),
+      fraction: new FormControl(this.data.fraction ? this.data.fraction : '', Validators.pattern('[A-Za-zА-Яа-я]+')),
+      dateOfBirth: new FormControl(this.data.dateOfBirth ? this.data.dateOfBirth : '', Validators.required),
     });
   }
 
@@ -38,8 +41,8 @@ export class HeroDialogExampleComponent {
     this.hero.level = Number(this.hero.level);
     this.heroService.addHero(this.hero).subscribe(
       () => {
-        this.openSnackBar('Success', 'adding hero');
         this.close();
+        this.openSnackBar('Success', 'adding hero');
       },
       error => {
         this.openSnackBar(error.error, 'adding Hero');
@@ -55,8 +58,8 @@ export class HeroDialogExampleComponent {
     this.hero._id = this.data._id;
     this.hero.level = Number(this.hero.level);
     this.heroService.updateHero(this.hero).subscribe(() => {
-      this.close();
       this.openSnackBar('Success', 'changing hero');
+      this.close();
     },
         error => this.openSnackBar(error.error, 'changing Hero'));
   }
